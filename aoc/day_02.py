@@ -14,7 +14,6 @@ def main():
 def run_part_two():
     total_sum = 0
     for line in read_data('day-02'):
-        game_id = get_game_id(line)
         all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
         running_total = {
             'red': 0,
@@ -25,10 +24,7 @@ def run_part_two():
             cube_number, cube_colour = cube.split(' ')
             if running_total[cube_colour] < int(cube_number):
                 running_total[cube_colour] = int(cube_number)
-        print(running_total)
         total_sum += reduce(mul, running_total.values(), 1)
-
-        print(f"Game ID: {game_id}, cubes: {all_cubes} -> {line}")
     print(total_sum)
 
 
