@@ -13,7 +13,7 @@ def main():
 
 def run_part_two():
     total_sum = 0
-    for line in read_data('day-02'):
+    for line in read_data():
         all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
         running_total = {
             'red': 0,
@@ -36,7 +36,7 @@ def run_part_one():
     }
 
     valid_game = 0
-    for line in read_data('day-02'):
+    for line in read_data():
         game_id = get_game_id(line)
         all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
         valid_game += check_cube_number(CUBE_DICT, game_id, all_cubes)
@@ -52,7 +52,7 @@ def run_test():
     }
 
     valid_game = 0
-    for line in read_test_data('day-02'):
+    for line in read_test_data():
         game_id = get_game_id(line)
         all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
         valid_game += check_cube_number(CUBE_DICT, game_id, all_cubes)
