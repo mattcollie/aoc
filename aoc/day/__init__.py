@@ -2,9 +2,7 @@ from aoc.utils import read_test_data, read_data
 
 
 def main():
-    print(f"Test result: {test()}\n")
-    print(f"Part One result: {part_one()}\n")
-    print(f"Part Two result: {part_two()}\n")
+    print(f"\nTest result: {test()}\nPart One result: {part_one()}\nPart Two result: {part_two()}\n")
 
 
 def test():

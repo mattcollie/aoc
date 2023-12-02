@@ -4,15 +4,44 @@ from functools import reduce
 
 from aoc.utils import read_test_data, read_data
 
+CUBE_DICT = {
+    'red': 12,
+    'green': 13,
+    'blue': 14
+}
+
 
 def main():
-    # run_test()
-    # run_part_one()
-    run_part_two()
+    print(f"\nTest result: {test()}\nPart One result: {part_one()}\nPart Two result: {part_two()}\n")
 
 
-def run_part_two():
-    total_sum = 0
+def test():
+    result = 0
+
+    for line in read_test_data():
+        game_id = get_game_id(line)
+        all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
+        result += check_cube_number(CUBE_DICT, game_id, all_cubes)
+        print(f"Game ID: {game_id}, cubes: {all_cubes} -> {line}")
+
+    return result
+
+
+def part_one():
+    result = 0
+
+    for line in read_data():
+        game_id = get_game_id(line)
+        all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
+        result += check_cube_number(CUBE_DICT, game_id, all_cubes)
+        print(f"Game ID: {game_id}, cubes: {all_cubes} -> {line}")
+
+    return result
+
+
+def part_two():
+    result = 0
+
     for line in read_data():
         all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
         running_total = {
@@ -24,44 +53,13 @@ def run_part_two():
             cube_number, cube_colour = cube.split(' ')
             if running_total[cube_colour] < int(cube_number):
                 running_total[cube_colour] = int(cube_number)
-        total_sum += reduce(mul, running_total.values(), 1)
-    print(total_sum)
+        result += reduce(mul, running_total.values(), 1)
+
+    return result
 
 
-def run_part_one():
-    CUBE_DICT = {
-        'red': 12,
-        'green': 13,
-        'blue': 14
-    }
-
-    valid_game = 0
-    for line in read_data():
-        game_id = get_game_id(line)
-        all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
-        valid_game += check_cube_number(CUBE_DICT, game_id, all_cubes)
-        print(f"Game ID: {game_id}, cubes: {all_cubes} -> {line}")
-    print(valid_game)
-
-
-def run_test():
-    CUBE_DICT = {
-        'red': 12,
-        'green': 13,
-        'blue': 14
-    }
-
-    valid_game = 0
-    for line in read_test_data():
-        game_id = get_game_id(line)
-        all_cubes = re.findall('(\\d+ blue|\\d+ red|\\d+ green)', line)
-        valid_game += check_cube_number(CUBE_DICT, game_id, all_cubes)
-        print(f"Game ID: {game_id}, cubes: {all_cubes} -> {line}")
-    print(valid_game)
-
-
-def get_game_id(input: str) -> int:
-    return int(input[4:input.index(':')])
+def get_game_id(data: str) -> int:
+    return int(data[4:data.index(':')])
 
 
 def check_cube_number(cube_master, game_id, all_cubes):
