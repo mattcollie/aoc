@@ -3,7 +3,7 @@ import re
 
 
 def main():
-    with open('C:/repos/aoc/day-01/input1.txt', 'r') as f:
+    with open('/aoc/data/day-01/input1.txt', 'r') as f:
         reader = csv.reader(f)
         data = [d[0] for d in reader]
         # part_one(data)
